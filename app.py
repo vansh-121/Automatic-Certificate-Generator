@@ -5,6 +5,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.utils import ImageReader
 import io
+from PIL import Image  # Added for aspect ratio calculations
 
 app = Flask(__name__)
 
@@ -44,8 +45,17 @@ def generate_certificate():
     pdf.restoreState()
 
     # Header Logo
-    logo = ImageReader('BFGI-logo.jpg')
-    pdf.drawImage(logo, 3.25 * inch, 9.5 * inch, width=2 * inch, height=1 * inch, mask='auto')
+    # Load the logo and calculate aspect ratio
+    logo_path = 'BFGI-logo.jpg'
+    logo_image = Image.open(logo_path)
+    logo_aspect_ratio = logo_image.width / logo_image.height
+
+    # Define the desired width and calculate height to maintain aspect ratio
+    logo_width = 2 * inch
+    logo_height = logo_width / logo_aspect_ratio
+
+    # Draw the logo
+    pdf.drawImage(ImageReader(logo_image), 3.25 * inch, 9.5 * inch, width=logo_width, height=logo_height, mask='auto')
 
     # Title
     pdf.setFont("Helvetica-Bold", 30)
@@ -77,9 +87,6 @@ def generate_certificate():
     pdf.drawString(1 * inch, 3.5 * inch, f"Date: {date}")
     pdf.drawString(5.5 * inch, 3.5 * inch, "Authorized Signature:")
     
-    # Signature Line
-    # pdf.line(6.5 * inch, 3.6 * inch, 8 * inch, 3.6 * inch)
-
     # Footer with Organization Name
     pdf.setFont("Helvetica-Oblique", 12)
     pdf.setFillColor(colors.HexColor("#666666"))
@@ -89,7 +96,6 @@ def generate_certificate():
     buffer.seek(0)
 
     return send_file(buffer, as_attachment=True, download_name=f"{name}_certificate.pdf", mimetype='application/pdf')
-
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,18 +1,28 @@
-body {
+html, body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #f0f4f8, #d9e4f5);
   margin: 0;
   padding: 0;
+  height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: column;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centers content vertically */
+  align-items: center;    /* Centers content horizontally */
 }
 
 .container {
+  flex: 1; /* Allows the container to take remaining space */
   width: 100%;
   max-width: 500px;
   padding: 20px;
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center;    /* Center the content vertically if needed */
 }
 
 .form-card {
@@ -21,6 +31,7 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 30px;
   text-align: center;
+  width: 100%;
 }
 
 h1 {
@@ -74,3 +85,57 @@ button {
 button:hover {
   background: #0056b3;
 }
+
+/* Footer Styles */
+.footer {
+  text-align: center;
+  font-size: 14px; /* Responsive font size */
+  color: #555;
+  font-weight: 500;
+  background: #f0f4f8;
+  padding: 10px 15px; /* Reduced padding */
+  width: 100%;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Ensures padding doesn't increase total size */
+}
+
+.footer p {
+  margin: 5px 0; /* Minimal vertical spacing */
+}
+
+.footer .heart {
+  color: #e63946;
+  font-size: 16px;
+  animation: heartbeat 1.5s infinite;
+}
+
+.footer .name {
+  color: #003366;
+  font-weight: 600;
+}
+
+/* Heartbeat Animation */
+@keyframes heartbeat {
+  0%, 20%, 50%, 80%, 100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  60% {
+    transform: scale(0.9);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .footer {
+    font-size: 12px; /* Adjust font size for smaller screens */
+    padding: 8px 10px; /* Reduce padding */
+  }
+
+  .footer .heart {
+    font-size: 14px; /* Adjust icon size */
+  }
+}
+

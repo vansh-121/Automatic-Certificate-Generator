@@ -9,3 +9,12 @@ document.getElementById('certificate-form').addEventListener('submit', function 
     }
   });
   
+// Highlight the creator's name on hover
+document.querySelector('.footer .name').addEventListener('mouseenter', function () {
+    this.style.color = '#0056b3';
+  });
+  
+  document.querySelector('.footer .name').addEventListener('mouseleave', function () {
+    this.style.color = '#003366';
+  });
+  

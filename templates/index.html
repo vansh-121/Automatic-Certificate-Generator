@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="form-card">
+      <h1>Generate Your Certificate</h1>
+      <p>Fill out the details below to generate a personalized certificate.</p>
+      <form id="certificate-form" action="/generate" method="POST">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="organization">Organization Name</label>
+          <input type="text" id="organization" name="organization" placeholder="Enter organization name" required>
+        </div>
+        <div class="form-group">
+          <label for="course">Course Title</label>
+          <input type="text" id="course" name="course" placeholder="Enter the course title" required>
+        </div>
+        <div class="form-group">
+          <label for="date">Completion Date</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        <button type="submit">Generate Certificate</button>
+      </form>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

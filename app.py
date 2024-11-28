@@ -86,6 +86,34 @@ def generate_certificate():
     pdf.setFillColor(colors.black)
     pdf.drawString(1 * inch, 3.5 * inch, f"Date: {date}")
     pdf.drawString(5.5 * inch, 3.5 * inch, "Authorized Signature:")
+
+   # Signature Image
+   # Signature Image
+    signature_path = 'Signature_1.jpg'
+    signature_image = Image.open(signature_path)
+    signature_aspect_ratio = signature_image.width / signature_image.height
+
+    # Define the desired width and calculate height to maintain aspect ratio
+    signature_width = 1.5 * inch
+    signature_height = signature_width / signature_aspect_ratio
+
+    # Adjust X-position to align with the right side, under "Authorized Signature"
+    signature_x_position = 7.5 * inch - signature_width  # Align to the right margin (adjust as needed)
+
+    # Adjust Y-position to place below "Authorized Signature" text
+    signature_y_position = 3.5 * inch - signature_height - 0.2 * inch  # Add padding below the label
+
+    # Draw the signature image
+    pdf.drawImage(
+        ImageReader(signature_image),
+        signature_x_position,
+        signature_y_position,
+        width=signature_width,
+        height=signature_height,
+        mask='auto'
+    )
+
+
     
     # Footer with Organization Name
     pdf.setFont("Helvetica-Oblique", 12)

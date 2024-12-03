@@ -1,3 +1,5 @@
+# Mass Certificate Generator
+
 Objective:
 
 1) Automate the generation of certificates for events in bulk.
